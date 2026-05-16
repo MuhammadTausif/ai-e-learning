@@ -1,0 +1,31 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Backend
+/api/vendor
+/api/composer.lock
+
+# Frontend
+/frontend/node_modules
+/frontend/dist
+/frontend/.vite
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Database
+*.sql
+!database/schema.sql
