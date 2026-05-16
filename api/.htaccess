@@ -1,0 +1,19 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /api/
+
+    # Allow actual files and folders through (PHP files, etc.)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Route everything else to index.php
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Security: Block direct access to config files
+<FilesMatch "\.(env|sql|log|bak)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

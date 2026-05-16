@@ -1,7 +1,7 @@
 <?php
 $user_data = requireAuth();
-$user = Database::fetchOne(
-    'SELECT id, first_name, last_name, email, role, school_id, avatar FROM users WHERE id = $1',
+$user      = Database::fetchOne(
+    'SELECT id, first_name, last_name, email, role, school_id, avatar FROM users WHERE id = ?',
     [$user_data['id']]
 );
 
@@ -18,4 +18,4 @@ sendJson([
         'school_id' => $user['school_id'],
         'avatar'    => $user['avatar'],
     ],
-], 200);
+]);

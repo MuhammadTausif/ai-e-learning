@@ -1,0 +1,17 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Don't rewrite API calls
+    RewriteCond %{REQUEST_URI} ^/api [NC]
+    RewriteRule ^ - [L]
+
+    # Don't rewrite real files/folders
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Send all other routes to React's index.html
+    RewriteRule ^ index.html [L]
+</IfModule>

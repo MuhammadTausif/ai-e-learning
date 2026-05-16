@@ -12,7 +12,7 @@ define('JWT_EXPIRY', 7200); // 2 hours
 
 // ─── Database ───────────────────────────────────────────────────────────────
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_PORT', getenv('DB_PORT') ?: '5432');
+define('DB_PORT', getenv('DB_PORT') ?: '3306');
 define('DB_NAME', getenv('DB_NAME') ?: 'ai_school');
 define('DB_USER', getenv('DB_USER') ?: 'postgres');
 define('DB_PASS', getenv('DB_PASS') ?: '');

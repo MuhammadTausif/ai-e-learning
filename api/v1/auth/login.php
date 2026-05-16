@@ -1,7 +1,6 @@
 <?php
-$body = getRequestBody();
-
-$email = $body['email'] ?? '';
+$body     = getRequestBody();
+$email    = trim($body['email'] ?? '');
 $password = $body['password'] ?? '';
 
 if (!$email || !$password) {
@@ -9,18 +8,16 @@ if (!$email || !$password) {
 }
 
 $user = Database::fetchOne(
-    'SELECT * FROM users WHERE email = $1 AND status = $2',
-    [$email, 'active']
+    "SELECT * FROM users WHERE email = ? AND status = 'active'",
+    [$email]
 );
 
 if (!$user || !password_verify($password, $user['password'])) {
     sendError('Invalid credentials', 401);
 }
 
-// Update last login
-Database::query('UPDATE users SET last_login = NOW() WHERE id = $1', [$user['id']]);
+Database::query('UPDATE users SET last_login = NOW() WHERE id = ?', [$user['id']]);
 
-// Generate JWT
 $token = JWT::encode([
     'id'        => $user['id'],
     'email'     => $user['email'],
@@ -38,4 +35,4 @@ sendJson([
         'school_id' => $user['school_id'],
         'avatar'    => $user['avatar'],
     ],
-], 200);
+]);
